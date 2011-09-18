@@ -36,7 +36,7 @@ void z_xz_init ()
 {
   sprintf(parameters,"wb");   
 
-	z_xz_preset = comp_level | Z_XZ_COMPRESSION_EXTREME; 
+  z_xz_preset = comp_level | Z_XZ_COMPRESSION_EXTREME; 
   z_xz_check  = Z_XZ_INTEGRITY_CHECK;
 
   // weird, but liblzma/api/lzma/base.h says this is the way to go
