@@ -37,7 +37,7 @@ Other formats are `-x pcap` for the [PCAP packets](http://wiki.wireshark.org/Dev
 -s size
 -------
 
-In the example above this option says we want the files to have size of approximately 100kB. [Other suffixes](https://github.com/Janiczek/pipa/blob/master/src/helper.c#L75) are MB, GB, TB. Or, of course, no suffix, which just leaves the value in bytes.
+In the example above this option says we want the files to have size of approximately 100kB. Other suffixes are MB, GB, TB. Or, of course, no suffix, which just leaves the value in bytes.
 
 The files are *NOT* guaranteed to be always smaller than this size, in fact they will be greater or equal. With `-x none` there is also a problem with the size of internal buffer, which is, for the sake of compression efficiency (see more on compression below) set to 256kB. This means that if you set -s 100kB, it will probably cut the files after the 256kB or when it encounters EOF, not sooner. This will probably change and the buffer will be set to a smaller value.
 
