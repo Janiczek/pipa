@@ -57,16 +57,16 @@ Oh, and *this* is really important: you can create whole paths with it! For exam
 
 Okay, let's try something else! We don't want it to rotate by size, but by time. How will we do that? (BTW, this line below is a reason why this program exists in the first place)
 
-    $ tcpdump -i eth0 -w - | pipa -x pcap -z gz -i 5m eth0-%d%m%Y-%H%M%S.pcap
+    $ tcpdump -i eth0 -w - | pipa -x pcap -z gz -i 5m eth0-%d%m%Y-%H%M%S.pcap.gz
 
 This listens on the tcpdump sniffing on your network interface, and every 5 minutes starts putting it into a new file. 
 
 Well, that sentence wasn't entirely true. pipa aligns the time - if we start at 8:37:10 and we let it run for a few minutes, the files created will be:
 
-    eth0-19092011-083710.pcap
-    eth0-19092011-084000.pcap
-    eth0-19092011-084500.pcap
-    eth0-19092011-085000.pcap
+    eth0-19092011-083710.pcap.gz
+    eth0-19092011-084000.pcap.gz
+    eth0-19092011-084500.pcap.gz
+    eth0-19092011-085000.pcap.gz
 
 But hey, what was that `-z gz`??
 
