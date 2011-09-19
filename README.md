@@ -147,3 +147,15 @@ TODO
 2. Why can't we just set the `Z_XZ_OUT_LEN` to the `BUFSIZE?`
 3. Make sure we're not opening the same file when rotating! In this case we should probably not even close it (even without the -f option), and continue writing and checking if the 'to-be-new' filename changes.
 4. %2i etc.
+5. SIGUSR1 - stats like in `dd`?
+6. Non-blocking read for -x other than pcap.
+
+LICENSE
+=======
+
+GPLv3 License
+http://www.gnu.org/copyleft/gpl.html
+
+See LICENSE.txt
+
+Copyright 2011 Martin Janiczek (martin@janiczek.cz)
