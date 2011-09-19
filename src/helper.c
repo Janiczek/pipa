@@ -14,8 +14,7 @@ void print      (char *message) { fprintf(stderr,"%s",message); }
 void printError (char *message) { print(message); exit(1); }
 void printUsage ()
 {
-  printError("Usage: pipa [-x format]\n            [-t]\n            [-i secs]\n            [-s size]\n            [-c user-command]\n            [-z compression format (gz | bz2 | xz | lzo)]\n            [-# compression level (0..9)]\n            [-v]\n            [-f]\n            filename\n");
-  // TODO: when implemented -z support, add it here
+  printError("Usage: pipa [-x format (none | text | pcap)]\n            [-t]\n            [-i interval[s | m | h | d | w]]\n            [-s size[KB | MB | GB | TB]]\n            [-c user-command]\n            [-z compression format (gz | bz2 | xz | lzo)]\n            [-# compression level (0..9)]\n            [-v]\n            [-f]\n            filename\n");
 }
 
 // recursive mkdir
