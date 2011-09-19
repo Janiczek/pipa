@@ -6,10 +6,10 @@ This utility reads data from stdin, and in its simplest form just outputs it int
 Let it speak for itself:
 
     $ pipa
-    Usage: pipa [-x format (none | text | pcap)] 
+    Usage: pipa [-x format (none | text | pcap)]
                 [-t]
-                [-i secs]
-                [-s size]
+                [-i interval[s | m | h | d | w]]
+                [-s size[KB | MB | GB | TB]]
                 [-c user-command]
                 [-z compression format (gz | bz2 | xz | lzo)]
                 [-# compression level (0..9)]
