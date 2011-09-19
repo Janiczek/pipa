@@ -1,7 +1,7 @@
 pipa
 ====
 
-This utility reads data from stdin, and in its simplest form just outputs it into a file.
+This utility reads data from stdin, and in its simplest form just outputs it into a file. There's a lot more to it though.
 
 Let it speak for itself:
 
