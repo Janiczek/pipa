@@ -64,7 +64,7 @@ int  inc;
 int  inc_needed;
 char inc_str[64];
 
-unsigned long size;
+double size;
 struct stat st;
 
 unsigned long interval;

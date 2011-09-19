@@ -4,7 +4,7 @@
 //  Author: Martin Janiczek (martin@janiczek.cz)
 //
 //  Date Created: 26.8.2011
-//  Last Updated: 14.9.2011
+//  Last Updated: 19.9.2011
 //
 
 #include "helper.h"
@@ -74,21 +74,36 @@ double parse_string_size(char *value)
 
   // parse the suffix
   if (*value == '\0'
+   || strcmp(value, "b") == 0
    || strcmp(value, "B") == 0) return v;
 
-  if (strcmp(value, "KB") == 0
-   || strcmp(value, "kB") == 0) return v * 1000;
+  if (strcmp(value, "k") == 0
+   || strcmp(value, "K") == 0
+   || strcmp(value, "kb") == 0
+   || strcmp(value, "kB") == 0
+   || strcmp(value, "Kb") == 0
+   || strcmp(value, "KB") == 0) return v * 1024;
 
-  if (strcmp(value, "MB") == 0) return v * 1000 * 1000;
-  if (strcmp(value, "GB") == 0) return v * 1000 * 1000 * 1000;
-  if (strcmp(value, "TB") == 0) return v * 1000 * 1000 * 1000 * 1000;
+  if (strcmp(value, "m") == 0
+   || strcmp(value, "M") == 0
+   || strcmp(value, "mb") == 0
+   || strcmp(value, "mB") == 0
+   || strcmp(value, "Mb") == 0
+   || strcmp(value, "MB") == 0) return v * 1024 * 1024;
 
-  if (strcmp(value, "KiB") == 0
-   || strcmp(value, "kiB") == 0) return v * 1024;
+  if (strcmp(value, "g") == 0
+   || strcmp(value, "G") == 0
+   || strcmp(value, "gb") == 0
+   || strcmp(value, "gB") == 0
+   || strcmp(value, "Gb") == 0
+   || strcmp(value, "GB") == 0) return v * 1024 * 1024 * 1024;
 
-  if (strcmp(value, "MiB") == 0) return v * 1024 * 1024;
-  if (strcmp(value, "GiB") == 0) return v * 1024 * 1024 * 1024;
-  if (strcmp(value, "TiB") == 0) return v * 1024 * 1024 * 1024 * 1024;
+  if (strcmp(value, "t") == 0
+   || strcmp(value, "T") == 0
+   || strcmp(value, "tb") == 0
+   || strcmp(value, "tB") == 0
+   || strcmp(value, "Tb") == 0
+   || strcmp(value, "TB") == 0) return v * 1024 * 1024 * 1024 * 1024;
 
   printUsage(); // error, shouldn't have arrived here!
   return 0;
