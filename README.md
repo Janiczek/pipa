@@ -154,9 +154,11 @@ LICENSE
 =======
 
 GPLv3 License
+
 http://www.gnu.org/copyleft/gpl.html
 
 See LICENSE.txt
 
 Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
+
 LinuxBox.cz, s.r.o. (www.linuxbox.cz)
