@@ -4,7 +4,9 @@
 //  Date Created: 26.8.2011
 //  Last Updated: 19.9.2011
 //
-//  Copyright 2011 Martin Janiczek (martin@janiczek.cz)
+//  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
+//                 LinuxBox.cz, s.r.o.
+//                 www.linuxbox.cz
 //
 //  This file is part of pipa.
 //  
