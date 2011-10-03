@@ -266,6 +266,7 @@ void openFile()
 
 void closeFile()
 {
+  if (f_v) fprintf(stderr,"%s: Closing\n",filename);
   z_close();
 }
 
