@@ -1,7 +1,7 @@
 //
 //  sighandler.c
 //
-//  Date Created: 26.8.2011
+//  Date Created: 3.10.2011
 //  Last Updated: 3.10.2011
 //
 //  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
