@@ -237,7 +237,6 @@ int main(int argc, char **argv)
     }
 
     // close the file
-    if (f_v) fprintf(stderr,"%s: Closing\n",filename);
     closeFile();
 
     if (f_c)
