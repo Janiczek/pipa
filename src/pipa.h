@@ -2,7 +2,7 @@
 //  pipa.h
 //
 //  Date Created: 24.8.2011
-//  Last Updated: 19.9.2011
+//  Last Updated: 3.10.2011
 //
 //  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
@@ -29,6 +29,7 @@
 
 #include <ctype.h>
 #include <fcntl.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -39,6 +40,7 @@
 
 // functions
 #include "helper.h"
+#include "sighandler.h"
 
 // formats
 #include "f_none.h"
@@ -84,11 +86,14 @@ char inc_str[64];
 double size;
 struct stat st;
 
-unsigned long interval;
-time_t        t_file;
-struct tm    *t_file_st;
-int           t_first;
-unsigned long t_divided;
+unsigned long  interval;
+time_t         t_file;
+struct tm     *t_file_st;
+int            t_first;
+unsigned long  t_divided;
+
+int state; // 0 = file not opened ------> exit
+           // 1 = file opened ---> close, exit
 
 int            eof;
 int            uses_header;
@@ -97,11 +102,11 @@ size_t         buffer_bytes;
 unsigned char  header[HDRSIZE];
 unsigned char  buffer[BUFSIZE];
 
-char           filename[STRSIZE];
-char           filename_mask[STRSIZE];
-char          *filename_dir;
-char          *filename_tmp;
-char          *filename_tmp2;
+char  filename[STRSIZE];
+char  filename_mask[STRSIZE];
+char *filename_dir;
+char *filename_tmp;
+char *filename_tmp2;
 
 char  currentpath[FILENAME_MAX];
 char  fullpath[STRSIZE];

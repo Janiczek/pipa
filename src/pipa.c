@@ -2,7 +2,7 @@
 //  pipa.c
 //
 //  Date Created: 25.8.2011
-//  Last Updated: 19.9.2011
+//  Last Updated: 3.10.2011
 //
 //  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
@@ -77,6 +77,8 @@ int main(int argc, char **argv)
 
   memset(currentpath,0,sizeof(currentpath));
   memset(fullpath,0,sizeof(fullpath));
+
+  state = 0;
   
   f_init   = &f_none_init;
   f_header = &f_none_header;
@@ -190,9 +192,11 @@ int main(int argc, char **argv)
         abort();
     }
 
-  ////////////////////////////////////////// format preparations ////
+  ////////////////////////////// module + signal initializations ////
 
   f_init();
+  z_init();
+  sig_init();
 
   //////////////////////////////////////// filename preparations ////
 
@@ -208,9 +212,6 @@ int main(int argc, char **argv)
     inc_needed = 1;
     inc = 0;
   }
-
-  // put compression level to parameters for opening the file
-  z_init();
 
   while (1) // NEW FILE
   {

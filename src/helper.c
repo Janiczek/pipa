@@ -2,7 +2,7 @@
 //  helper.c
 //
 //  Date Created: 26.8.2011
-//  Last Updated: 19.9.2011
+//  Last Updated: 3.10.2011
 //
 //  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
@@ -249,6 +249,7 @@ void openFile()
   // open the file
   if (f_v) fprintf(stderr,"%s: Opening\n",filename);
   z_open();
+  state = 1;
 
   if (uses_header)
   {
@@ -267,6 +268,7 @@ void openFile()
 void closeFile()
 {
   z_close();
+  state = 0;
 }
 
 int checkRotation()
