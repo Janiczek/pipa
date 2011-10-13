@@ -2,7 +2,7 @@
 //  pipa.h
 //
 //  Date Created: 24.8.2011
-//  Last Updated: 3.10.2011
+//  Last Updated: 13.10.2011
 //
 //  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
@@ -101,6 +101,8 @@ size_t         header_bytes;
 size_t         buffer_bytes;
 unsigned char  header[HDRSIZE];
 unsigned char  buffer[BUFSIZE];
+
+int            tee_wrote_pcap_header;
 
 char  filename[STRSIZE];
 char  filename_mask[STRSIZE];

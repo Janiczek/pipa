@@ -2,7 +2,7 @@
 //  helper.c
 //
 //  Date Created: 26.8.2011
-//  Last Updated: 3.10.2011
+//  Last Updated: 13.10.2011
 //
 //  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
@@ -256,10 +256,22 @@ void openFile()
     eof = 0;
     // get header into the string
     f_header();
-    // write it - it's once per file!
+    // write it - it's once per file! and once per tee output!
     if (header_bytes)
     {
-      if (f_t) fwrite(header,1,header_bytes,stdout);
+      if (f_t)
+      {
+        if (f_init == &f_pcap_init)
+        {
+          if (!tee_wrote_pcap_header)
+          {
+            tee_wrote_pcap_header = 1;
+            fwrite(header,1,header_bytes,stdout);
+          }
+        }
+        else
+          fwrite(header,1,header_bytes,stdout);
+      }
       z_write(header,header_bytes);
     }
   }

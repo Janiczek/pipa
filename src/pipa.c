@@ -2,7 +2,7 @@
 //  pipa.c
 //
 //  Date Created: 25.8.2011
-//  Last Updated: 3.10.2011
+//  Last Updated: 13.10.2011
 //
 //  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
@@ -64,6 +64,8 @@ int main(int argc, char **argv)
   uses_header  = 0;
   header_bytes = 0;
   buffer_bytes = 0;
+
+  tee_wrote_pcap_header = 0;
 
   memset(header,0,sizeof(header));
   memset(buffer,0,sizeof(buffer));  
