@@ -2,7 +2,7 @@
 //  pipa.h
 //
 //  Date Created: 24.8.2011
-//  Last Updated: 13.10.2011
+//  Last Updated: 16.10.2011
 //
 //  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
@@ -41,6 +41,7 @@
 // functions
 #include "helper.h"
 #include "sighandler.h"
+#include "nonblock.h"
 
 // formats
 #include "f_none.h"
@@ -102,7 +103,7 @@ size_t         buffer_bytes;
 unsigned char  header[HDRSIZE];
 unsigned char  buffer[BUFSIZE];
 
-int            tee_wrote_pcap_header;
+int tee_wrote_pcap_header;
 
 char  filename[STRSIZE];
 char  filename_mask[STRSIZE];
@@ -114,10 +115,14 @@ char  currentpath[FILENAME_MAX];
 char  fullpath[STRSIZE];
 pid_t pid;
 
+// FUNCTION POINTERS
+
+// file format
 void (*f_init)  ();
 void (*f_header)();
 void (*f_read)  ();
 
+// compression format
 void (*z_init) ();
 void (*z_open) ();
 void (*z_write)(void *location, size_t nbytes);

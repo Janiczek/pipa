@@ -2,7 +2,7 @@
 //  pipa.c
 //
 //  Date Created: 25.8.2011
-//  Last Updated: 13.10.2011
+//  Last Updated: 16.10.2011
 //
 //  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
   memset(header,0,sizeof(header));
   memset(buffer,0,sizeof(buffer));  
 
-  memset(filename,0,sizeof(filename));
+  memset(filename,     0,sizeof(filename));
   memset(filename_mask,0,sizeof(filename_mask));
 
   filename_dir  = NULL;
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
   filename_tmp2 = NULL;
 
   memset(currentpath,0,sizeof(currentpath));
-  memset(fullpath,0,sizeof(fullpath));
+  memset(fullpath,   0,sizeof(fullpath));
 
   state = 0;
   

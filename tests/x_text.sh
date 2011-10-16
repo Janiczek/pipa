@@ -1,4 +1,6 @@
-echo -n "file format text - ";
+exec 2>/dev/null;
+
+echo -n ".";
 
 cat tests/data/bin | ./pipa -x text -s 8192 %i.txt.part;
 
@@ -10,13 +12,15 @@ S1=`md5sum tests/data/bin | head -c 32`;
 S2=`md5sum new.txt        | head -c 32`;
 
 if [ "$S1" = "$S2" ];
-  then result=1;
-  else result=0;
+  then result=0;
+  else
+    result=1;
+    echo -e "\nx_text.sh: text file format and binary data.";
 fi;
 
 rm *.txt*;
 
-if [ $result -eq 1 ]; then
+if [ $result -eq 0 ]; then
 
   cat tests/data/seq | ./pipa -x text -s 8192 %i.txt.part;
 
@@ -27,11 +31,12 @@ if [ $result -eq 1 ]; then
   S1=`md5sum tests/data/seq | head -c 32`;
   S2=`md5sum new.txt        | head -c 32`;
 
-  if [ "$S1" = "$S2" ];
-    then echo "PASS";
-    else echo "ERROR";
+  if [ "$S1" != "$S2" ];
+    then echo -e "\nx_text.sh: text file format and plaintext data.";
   fi;
 
   rm *.txt*;
 
 fi;
+
+exit;

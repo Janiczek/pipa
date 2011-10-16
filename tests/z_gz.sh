@@ -1,4 +1,6 @@
-echo -n "compression format .gz  - ";
+exec 2>/dev/null;
+
+echo -n ".";
 
 cat tests/data/seq | ./pipa -z gz -s 1024 %i.txt.part.gz;
 
@@ -11,9 +13,8 @@ cat *.txt.part >new.txt;
 S1=`md5sum tests/data/seq | head -c 32`;
 S2=`md5sum new.txt        | head -c 32`;
 
-if [ "$S1" = "$S2" ];
-  then echo "PASS";
-  else echo "ERROR";
+if [ "$S1" != "$S2" ];
+  then echo -e "\nz_gz.sh: compression format .gz";
 fi;
 
-rm *.txt*
+rm *.txt*;

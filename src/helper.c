@@ -2,7 +2,7 @@
 //  helper.c
 //
 //  Date Created: 26.8.2011
-//  Last Updated: 13.10.2011
+//  Last Updated: 16.10.2011
 //
 //  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
@@ -27,6 +27,7 @@
 #include "helper.h"
 
 // print to stderr
+
 void print      (char *message) { fprintf(stderr,"%s",message); }
 void printError (char *message) { print(message); exit(1); }
 void printUsage ()
@@ -304,55 +305,3 @@ int checkRotation()
   return 0;
 }
 
-size_t fread_nb (void *location, size_t nbytes)
-{
-  fd_set rfds;
-  FD_ZERO(&rfds);
-
-  struct timeval tv;
-
-  size_t has_to_read = nbytes;
-  size_t read_so_far = 0;
-  size_t read_bytes = 0;
-
-  int select_result = 0;
-
-  do
-  {
-    FD_SET(STDIN_FILENO,&rfds);
-
-    tv.tv_sec = 1;
-    tv.tv_usec = 0;
-
-    if ((select_result = select(STDIN_FILENO+1,&rfds,NULL,NULL,&tv)))
-    {
-      // we have data!
-      read_bytes = fread(location + read_so_far, 1, has_to_read, stdin);
-      if (feof(stdin))
-      {
-        eof = 1;
-        if (!read_bytes) // read it all and ended on EOF
-          has_to_read = 0;
-        break;
-      }
-      if (read_bytes > 0)
-      {
-        has_to_read -= read_bytes;
-        read_so_far += read_bytes;
-      }
-      if (!has_to_read) break;
-    }
-    else if (select_result != -1)
-    {
-      // no data
-      if (checkRotation())
-      {
-        closeFile();
-        openFile();
-      }
-    }
-
-  } while (has_to_read);
-
-  return read_so_far;
-}

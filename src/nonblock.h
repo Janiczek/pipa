@@ -1,7 +1,7 @@
 //
-//  sighandler.c
+//  nonblock.h
 //
-//  Date Created: 3.10.2011
+//  Date Created: 16.10.2011
 //  Last Updated: 16.10.2011
 //
 //  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
@@ -24,23 +24,9 @@
 //  along with pipa.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "sighandler.h"
+#include "pipa.h"
 
-void sig_init()
-{
-  signal(SIGINT,end_gracefully); // we can't do much in this function,
-                                 // so JMP into other one and do work there.
-}
+#define NONBLOCK_SET()   fcntl(STDIN_FILENO,F_SETFL,O_NONBLOCK);
+#define NONBLOCK_UNSET() fcntl(STDIN_FILENO,F_SETFL,fcntl(STDIN_FILENO,F_GETFL) & ~O_NONBLOCK);
 
-void end_gracefully (int sig)
-{
-  switch (state)
-  {
-    case 1:
-      closeFile(); // makes sure we flush the compression buffers
-                   // before exiting -> not losing any processed data.
-    case 0:
-      exit(sig);
-      break;
-  }
-}
+size_t fread_nb (void *location, size_t nbytes);
