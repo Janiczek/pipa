@@ -17,7 +17,7 @@ If the `scons` command says `scons: done building targets.`, you're done! Well, 
 
     $ cp ./pipa /usr/bin/pipa
 
-After compiling you can test if all works as it should: (dependencies: **md5sum** for all the tests, **mergecap** (part of wireshark) for x_pcap.sh test)
+After compiling you can test if all works as it should: (dependencies: **md5sum** for all the tests, **mergecap** (part of wireshark) for x_pcap* tests)
 
     $ ./all.sh
 
