@@ -2,7 +2,7 @@
 //  helper.c
 //
 //  Date Created: 26.8.2011
-//  Last Updated: 16.10.2011
+//  Last Updated: 11.6.2012
 //
 //  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
@@ -32,7 +32,16 @@ void print      (char *message) { fprintf(stderr,"%s",message); }
 void printError (char *message) { print(message); exit(1); }
 void printUsage ()
 {
-  printError("Usage: pipa [-x format (none | text | pcap)]\n            [-t]\n            [-i interval[s | m | h | d | w]]\n            [-s size[KB | MB | GB | TB]]\n            [-c user-command]\n            [-z compression format (gz | bz2 | xz | lzo)]\n            [-# compression level (0..9)]\n            [-v]\n            [-f]\n            filename\n");
+  printError("Usage: pipa [-x format (none | text | pcap)]\n"
+             "            [-t]\n"
+             "            [-i interval[s | m | h | d | w]]\n"
+             "            [-s size[KB | MB | GB | TB]]\n"
+             "            [-c user-command]\n"
+             "            [-z compression format (gz | bz2 | xz | lzo)]\n"
+             "            [-# compression level (0..9)]\n"
+             "            [-v]\n"
+             "            [-f]\n"
+             "            filename\n");
 }
 
 // recursive mkdir
