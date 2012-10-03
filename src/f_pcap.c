@@ -59,14 +59,12 @@ void f_pcap_read ()
   }
 
   // cast the right part into an uint, read length
-  packet_len = (unsigned int) *(buffer + PACKET_LEN_POS)
-             + (unsigned int) *(buffer + PACKET_LEN_POS + 1)*256
-             + (unsigned int) *(buffer + PACKET_LEN_POS + 2)*256*256
-             + (unsigned int) *(buffer + PACKET_LEN_POS + 3)*256*256*256;
+  memcpy(&packet_len, buffer + PACKET_LEN_POS, sizeof(packet_len));
 
   // packet must fit into rest of the buffer!
   packet_len = (BUFSIZE < packet_len) ? BUFSIZE - PACKET_HDR_SIZE
                                       : packet_len;
+  // TODO: what if buffer doesn't hold?
 
   // read packet into buffer after the header
   buffer_bytes += fread_nb(buffer + buffer_bytes,packet_len);
