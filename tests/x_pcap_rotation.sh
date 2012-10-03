@@ -4,7 +4,7 @@ echo -n ".";
 
 cat tests/data/pcap_big | ./pipa -s 1000000 -x pcap A%i.part;
 
-mergecap -w glued.pcap *.part;
+mergecap -F libpcap -w glued.pcap *.part; # would assume pcapng without -F
 
 S1=`md5sum tests/data/pcap_big | head -c 32`;
 S2=`md5sum glued.pcap          | head -c 32`;
