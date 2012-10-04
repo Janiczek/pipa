@@ -45,24 +45,15 @@
 //  - are we gonna run into problems if we discard
 //    all options in the first SHB in a stream?
 //
-//  - TODO: when checking every block for SHB,
-//          should we keep the last one somewhere for the headers?
+//  - when checking every block for SHB,
+//    should we keep the last one somewhere for the headers?
 //
-//          probably not required, we can use the const one
-//          if we'd have to remember the actual ones,
-//          we would have to solve the problem of variable lengths:
+//    probably not required, we can use the const one
+//    if we'd have to remember the actual ones,
+//    we would have to solve the problem of variable lengths:
 //
-//            |-- SHB 1 --|------ IDBs ------|
-//            |--- SHB 2 ---|------ IDBs ------|
-
-// SHB:
-// 4 bytes - 0x0a0d0d0a         - block type       = SHB
-// 4 bytes - 0x0000001c         - block length     = 28
-// 4 bytes - 0x1a2b3c4d         - byte order magic = const
-// 2 bytes - 0x0001             - major version    = 1
-// 2 bytes - 0x0000             - minor version    = 0
-// 8 bytes - 0xffffffffffffffff - section length   = -1
-// 4 bytes - 0x0000001c         - block length     = 28
+//      |-- SHB 1 --|------ IDBs ------|
+//      |--- SHB 2 ---|------ IDBs ------|
 
 #define PCAPNG_HDR_LEN     28
 #define PCAPNG_BLK_LEN_POS 8 // block type + length

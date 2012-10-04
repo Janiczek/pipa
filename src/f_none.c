@@ -44,5 +44,4 @@ void f_none_read (void)
   eof = buffer_bytes < BUFSIZE;
 
   //buffer_bytes = fread_nb(buffer,BUFSIZE);
-  // maybe TODO someday?
 }

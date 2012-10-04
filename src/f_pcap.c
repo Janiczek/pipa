@@ -64,7 +64,6 @@ void f_pcap_read (void)
   // packet must fit into rest of the buffer!
   packet_len = (BUFSIZE < packet_len) ? BUFSIZE - PCAP_PACKET_HDR_SIZE
                                       : packet_len;
-  // TODO: what if buffer doesn't hold?
 
   // read packet into buffer after the header
   buffer_bytes += fread_nb(buffer + buffer_bytes,packet_len);
