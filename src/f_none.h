@@ -26,6 +26,6 @@
 
 #include "pipa.h"
 
-void f_none_init   ();
-void f_none_header ();
-void f_none_read   ();
+void f_none_init   (void);
+void f_none_header (void);
+void f_none_read   (void);

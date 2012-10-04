@@ -30,7 +30,7 @@
 
 BZFILE *z_bz2_fd;
 
-void z_bz2_init  ();
-void z_bz2_open  ();
+void z_bz2_init  (void);
+void z_bz2_open  (void);
 void z_bz2_write (void *location, size_t nbytes);
-void z_bz2_close ();
+void z_bz2_close (void);

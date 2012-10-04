@@ -26,43 +26,43 @@
 
 #include "f_pcap.h"
 
-void f_pcap_init ()
+void f_pcap_init (void)
 {
   NONBLOCK_SET();
   packet_len = 0;
   uses_header = 1;
 }
 
-void f_pcap_header ()
+void f_pcap_header (void)
 {
   if (!header[0])
   {
-    header_bytes = fread_nb(header,PCAP_HDR_SIZE);
-    if (header_bytes < PCAP_HDR_SIZE)
+    header_bytes = fread_nb(header,PCAP_FILE_HDR_SIZE);
+    if (header_bytes < PCAP_FILE_HDR_SIZE)
     {
       eof = 1;
       return;
     }
   }
-  else header_bytes = PCAP_HDR_SIZE;
+  else header_bytes = PCAP_FILE_HDR_SIZE;
 }
 
-void f_pcap_read ()
+void f_pcap_read (void)
 {
   // read packet header into buffer
-  buffer_bytes = fread_nb(buffer,PACKET_HDR_SIZE);
+  buffer_bytes = fread_nb(buffer,PCAP_PACKET_HDR_SIZE);
 
-  if (buffer_bytes < PACKET_HDR_SIZE) // didn't read anything
+  if (buffer_bytes < PCAP_PACKET_HDR_SIZE) // didn't read anything
   {
     eof = 1;
     return;
   }
 
   // cast the right part into an uint, read length
-  memcpy(&packet_len, buffer + PACKET_LEN_POS, sizeof(packet_len));
+  memcpy(&packet_len, buffer + PCAP_PACKET_LEN_POS, sizeof(packet_len));
 
   // packet must fit into rest of the buffer!
-  packet_len = (BUFSIZE < packet_len) ? BUFSIZE - PACKET_HDR_SIZE
+  packet_len = (BUFSIZE < packet_len) ? BUFSIZE - PCAP_PACKET_HDR_SIZE
                                       : packet_len;
   // TODO: what if buffer doesn't hold?
 

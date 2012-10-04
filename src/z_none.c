@@ -26,12 +26,12 @@
 
 #include "z_none.h"
 
-void z_none_init ()
+void z_none_init (void)
 {
   sprintf(parameters,"wb");   
 }
 
-void z_none_open  ()
+void z_none_open  (void)
 {
   if ((z_none_fd = fopen(filename, parameters)) == NULL)
   {
@@ -49,7 +49,7 @@ void z_none_write (void *location, size_t nbytes)
   }
 }
 
-void z_none_close ()
+void z_none_close (void)
 {
   if (fclose(z_none_fd) != 0)
   {

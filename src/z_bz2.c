@@ -26,12 +26,12 @@
 
 #include "z_bz2.h"
 
-void z_bz2_init ()
+void z_bz2_init (void)
 {
   sprintf(parameters,"wb%d",comp_level);   
 }
 
-void z_bz2_open  ()
+void z_bz2_open  (void)
 {
   if ((z_bz2_fd = BZ2_bzopen(filename, parameters)) == NULL)
   {
@@ -49,7 +49,7 @@ void z_bz2_write (void *location, size_t nbytes)
   }
 }
 
-void z_bz2_close ()
+void z_bz2_close (void)
 {
   // BZ2_bzflush(z_bz2_fd); // BZ2_bzflush doesn't do anything in v1.0.6
   BZ2_bzclose(z_bz2_fd);    // BZ2_bzclose doesn't have return value in v1.0.6

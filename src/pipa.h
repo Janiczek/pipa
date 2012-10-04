@@ -47,6 +47,7 @@
 #include "f_none.h"
 #include "f_text.h"
 #include "f_pcap.h"
+#include "f_pcapng.h"
 
 // compression formats
 #include "z_none.h"
@@ -58,8 +59,8 @@
 // constants
 #define DEFAULT_COMP_LEVEL 2
 
-#define STRSIZE 1024          // for paths, filenames, ...
-#define HDRSIZE PCAP_HDR_SIZE // right now only format that uses header is PCAP
+#define STRSIZE 1024               // for paths, filenames, ...
+#define HDRSIZE 1024
 #define BUFSIZE 256*1024
 
 // global variables
@@ -118,14 +119,14 @@ pid_t pid;
 // FUNCTION POINTERS
 
 // file format
-void (*f_init)  ();
-void (*f_header)();
-void (*f_read)  ();
+void (*f_init)   (void);
+void (*f_header) (void);
+void (*f_read)   (void);
 
 // compression format
-void (*z_init) ();
-void (*z_open) ();
-void (*z_write)(void *location, size_t nbytes);
-void (*z_close)();
+void (*z_init)  (void);
+void (*z_open)  (void);
+void (*z_write) (void *location, size_t nbytes);
+void (*z_close) (void);
 
 #endif

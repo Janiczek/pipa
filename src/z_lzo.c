@@ -71,7 +71,7 @@ void z_lzo_write32 (unsigned long v)
   z_lzo_hdr_adler = lzo_adler32(z_lzo_hdr_adler,b,4);
 }
 
-void z_lzo_init ()
+void z_lzo_init (void)
 {
   z_lzo_out     = NULL;
   z_lzo_out_len = 0;
@@ -84,7 +84,7 @@ void z_lzo_init ()
     printError("Error while initializing LZO!\n");
 }
 
-void z_lzo_open ()
+void z_lzo_open (void)
 {
   z_lzo_wrkmem = (lzo_voidp) malloc (LZO1X_1_MEM_COMPRESS);
   if (z_lzo_wrkmem == NULL)
@@ -164,7 +164,7 @@ void z_lzo_write (void *location, size_t nbytes)
   free(z_lzo_out);
 }
 
-void z_lzo_close ()
+void z_lzo_close (void)
 {
   // write EOF marker
   z_lzo_write32(0);

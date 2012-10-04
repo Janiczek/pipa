@@ -30,7 +30,7 @@
 
 gzFile z_gz_fd;
 
-void z_gz_init  ();
-void z_gz_open  ();
+void z_gz_init  (void);
+void z_gz_open  (void);
 void z_gz_write (void *location, size_t nbytes);
-void z_gz_close ();
+void z_gz_close (void);

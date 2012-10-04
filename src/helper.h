@@ -33,7 +33,7 @@
 
 void    print              (char *message);
 void    printError         (char *message);
-void    printUsage         ();
+void    printUsage         (void);
 
 int     mkpath             (const char *s, mode_t mode);
 
@@ -42,6 +42,6 @@ char   *replace_str        (char *str, char *orig, char *rep);
 double  parse_string_size  (char *value);
 double  parse_string_time  (char *value);
 
-void    openFile           ();
-void    closeFile          ();
-int     checkRotation      ();
+void    openFile           (void);
+void    closeFile          (void);
+int     checkRotation      (void);

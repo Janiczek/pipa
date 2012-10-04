@@ -26,13 +26,13 @@
 
 #include "pipa.h"
 
-#define PCAP_HDR_SIZE   24
-#define PACKET_HDR_SIZE 16 // 4 * uint32
-#define PACKET_LEN_POS  8  // third uint32 in the struct is our length
-                           // (0 - first, 4 - second, 8 - third)
+#define PCAP_FILE_HDR_SIZE   24
+#define PCAP_PACKET_HDR_SIZE 16 // 4 * uint32
+#define PCAP_PACKET_LEN_POS  8  // third uint32 in the struct is our length
+                                // (0 - first, 4 - second, 8 - third)
 
 unsigned int packet_len;
 
-void f_pcap_init   ();
-void f_pcap_header ();
-void f_pcap_read   ();
+void f_pcap_init   (void);
+void f_pcap_header (void);
+void f_pcap_read   (void);

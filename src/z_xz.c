@@ -49,7 +49,7 @@ void z_xz_run()
   } while (z_xz_stream.avail_out == 0);
 }
 
-void z_xz_init ()
+void z_xz_init (void)
 {
   sprintf(parameters,"wb");   
 
@@ -65,7 +65,7 @@ void z_xz_init ()
   z_xz_out_len = 0;
 }
 
-void z_xz_open  ()
+void z_xz_open  (void)
 {
   if ((z_xz_ret = lzma_easy_encoder(&z_xz_stream, z_xz_preset, z_xz_check))
           != LZMA_OK)
@@ -87,7 +87,7 @@ void z_xz_write (void *location, size_t nbytes)
   z_xz_run();
 }
 
-void z_xz_close ()
+void z_xz_close (void)
 {
   z_xz_stream.avail_in = 0;
   z_xz_action = LZMA_FINISH;

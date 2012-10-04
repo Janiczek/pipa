@@ -26,12 +26,12 @@
 
 #include "z_gz.h"
 
-void z_gz_init ()
+void z_gz_init (void)
 {
   sprintf(parameters,"wb%d",comp_level);   
 }
 
-void z_gz_open  ()
+void z_gz_open  (void)
 {
   if ((z_gz_fd = gzopen(filename, parameters)) == NULL)
   {
@@ -49,7 +49,7 @@ void z_gz_write (void *location, size_t nbytes)
   }
 }
 
-void z_gz_close ()
+void z_gz_close (void)
 {
   gzflush(z_gz_fd,Z_FINISH);
   if (gzclose(z_gz_fd) != Z_OK)

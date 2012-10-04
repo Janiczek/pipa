@@ -30,7 +30,7 @@
 
 void print      (char *message) { fprintf(stderr,"%s",message); }
 void printError (char *message) { print(message); exit(1); }
-void printUsage ()
+void printUsage (void)
 {
   printError("Usage: pipa [-x format (none | text | pcap)]\n"
              "            [-t]\n"
@@ -189,7 +189,7 @@ double parse_string_time(char *value)
   return 0;
 }
 
-void openFile()
+void openFile(void)
 {
   // opens a new file and writes a header
 
@@ -287,14 +287,14 @@ void openFile()
   }
 }
 
-void closeFile()
+void closeFile(void)
 {
   if (f_v) fprintf(stderr,"%s: Closing\n",filename);
   z_close();
   state = 0;
 }
 
-int checkRotation()
+int checkRotation(void)
 {
   // check size
   if (f_s)

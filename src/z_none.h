@@ -28,7 +28,7 @@
 
 FILE *z_none_fd;
 
-void z_none_init  ();
-void z_none_open  ();
+void z_none_init  (void);
+void z_none_open  (void);
 void z_none_write (void *location, size_t nbytes);
-void z_none_close ();
+void z_none_close (void);

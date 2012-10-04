@@ -26,16 +26,16 @@
 
 #include "f_text.h"
 
-void f_text_init ()
+void f_text_init (void)
 {
   //NONBLOCK_UNSET();
   uses_header = 0;
 }
 
-void f_text_header ()
+void f_text_header (void)
 {}
 
-void f_text_read ()
+void f_text_read (void)
 {
   do
   {

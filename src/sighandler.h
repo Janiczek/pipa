@@ -26,5 +26,5 @@
 
 #include "pipa.h"
 
-void sig_init       ();
+void sig_init       (void);
 void end_gracefully (int sig);

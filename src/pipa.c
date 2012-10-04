@@ -113,6 +113,12 @@ int main(int argc, char **argv)
           f_header = &f_pcap_header;
           f_read   = &f_pcap_read;
         }
+        else if (!strcmp(optarg,"pcapng"))
+        {
+          f_init   = &f_pcapng_init;
+          f_header = &f_pcapng_header;
+          f_read   = &f_pcapng_read;
+        }
         break;
 
       case 't':

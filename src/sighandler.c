@@ -26,7 +26,7 @@
 
 #include "sighandler.h"
 
-void sig_init()
+void sig_init(void)
 {
   signal(SIGINT,end_gracefully); // we can't do much in this function,
                                  // so JMP into other one and do work there.

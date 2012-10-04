@@ -43,8 +43,8 @@ lzma_action   z_xz_action;
 lzma_ret      z_xz_ret;
 FILE         *z_xz_fd;
 
-void z_xz_run   ();
-void z_xz_init  ();
-void z_xz_open  ();
+void z_xz_run   (void);
+void z_xz_init  (void);
+void z_xz_open  (void);
 void z_xz_write (void *location, size_t nbytes);
-void z_xz_close ();
+void z_xz_close (void);

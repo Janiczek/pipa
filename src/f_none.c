@@ -26,16 +26,16 @@
 
 #include "f_none.h"
 
-void f_none_init ()
+void f_none_init (void)
 {
   //NONBLOCK_UNSET();
   uses_header = 0;
 }
 
-void f_none_header ()
+void f_none_header (void)
 {}
 
-void f_none_read ()
+void f_none_read (void)
 {
   // read full buffer and send it
   // if EOF, cut it before

@@ -29,6 +29,6 @@
 int c;
 int send;
 
-void f_text_init   ();
-void f_text_header ();
-void f_text_read   ();
+void f_text_init   (void);
+void f_text_header (void);
+void f_text_read   (void);
