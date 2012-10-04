@@ -143,12 +143,14 @@ Of course, this is equivalent to `-c echo`, but you get the idea. And you're lim
 TODO
 ====
 
-1. BUFSIZE - smaller value? set by user or by the "-s" value?
-2. Why can't we just set the `Z_XZ_OUT_LEN` to the `BUFSIZE?`
-3. Make sure we're not opening the same file when rotating! In this case we should probably not even close it (even without the -f option), and continue writing and checking if the 'to-be-new' filename changes.
-4. %2i etc.
-5. SIGUSR1 - stats like in `dd`?
-6. Non-blocking read for -x other than pcap.
+- Test suite somehow combining all formats, all compressions, + rotation?
+- Non-blocking read for -x other than pcap - what was the issue here again?
+
+- BUFSIZE - smaller value? set by user or by the "-s" value?
+- Why can't we just set the `Z_XZ_OUT_LEN` to the `BUFSIZE?`
+- Make sure we're not opening the same file when rotating! In this case we should probably not even close it (even without the -f option), and continue writing and checking if the 'to-be-new' filename changes.
+- %2i etc.
+- SIGUSR1 - stats like in `dd`?
 
 LICENSE
 =======
