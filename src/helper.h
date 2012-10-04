@@ -35,6 +35,8 @@ void    print              (char *message);
 void    printError         (char *message);
 void    printUsage         (void);
 
+#define PRINT(...) fprintf(stderr,__VA_ARGS__)
+
 int     mkpath             (const char *s, mode_t mode);
 
 char   *replace_str        (char *str, char *orig, char *rep);

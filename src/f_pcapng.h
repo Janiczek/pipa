@@ -2,7 +2,7 @@
 //  f_pcap.h
 //
 //  Date Created: 1.10.2012 
-//  Last Updated: 3.10.2012 
+//  Last Updated: 4.10.2012 
 //
 //  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
@@ -37,20 +37,25 @@
 //   - block length - uint32 (for backwards reading+skipping)
 
 // The format doesn't technically have a file header...
-// But each file must have a SHB and if we are splitting
-//   in middle of packets, we have to supply one.
+// But each file must have a SHB and IDB and if we are
+//   splitting in middle of packets, we have to supply them.
 
 // Some thoughts on this:
 //
-//  - editcap sets section length = -1 ("find for yourself")
-//    when processing a file - probably so that it doesn't have to
-//    parse the file beforehand and process it as a stream instead
+//  - are we gonna run into problems if we discard
+//    all options in the first SHB in a stream?
 //
-//  - TODO: are we gonna run into problems if we discard
-//          all options in the first SHB in a stream?
-//          what would we gain by this:
-//            file header would be constant string
+//  - TODO: when checking every block for SHB,
+//          should we keep the last one somewhere for the headers?
+//
+//          probably not required, we can use the const one
+//          if we'd have to remember the actual ones,
+//          we would have to solve the problem of variable lengths:
+//
+//            |-- SHB 1 --|------ IDBs ------|
+//            |--- SHB 2 ---|------ IDBs ------|
 
+// SHB:
 // 4 bytes - 0x0a0d0d0a         - block type       = SHB
 // 4 bytes - 0x0000001c         - block length     = 28
 // 4 bytes - 0x1a2b3c4d         - byte order magic = const
@@ -59,19 +64,6 @@
 // 8 bytes - 0xffffffffffffffff - section length   = -1
 // 4 bytes - 0x0000001c         - block length     = 28
 
-//  - TODO: what about little/big endianness? checking of BOM? ???
-//    - Likely way:
-//        0. have two headers ready - one for little endian, one for big
-//        1. endianness = find out in f_..._header() from the first SHB
-//        2. on each block:
-//            - if SHB:
-//                - check the endianness
-//                - copy our const header of that endianness
-//            - else:
-//                - copy right away
-//        3. on rotation (on new file):
-//            - use last endianness
-
 #define PCAPNG_HDR_LEN     28
 #define PCAPNG_BLK_LEN_POS 8 // block type + length
 
@@ -79,22 +71,26 @@
 #define PCAPNG_SHB_SECLEN  0xFFFFFFFF
 
 // little endian
-#define PCAPNG_HDR_LIL_BLKLEN 0x1C000000
-#define PCAPNG_HDR_LIL_BOM    0x4D3C2B1A
-#define PCAPNG_HDR_LIL_VER_MA 0x0100
-#define PCAPNG_HDR_LIL_VER_MI 0x0000
-
+#define PCAPNG_LIL_SHB_BLKLEN  0x1C000000
+#define PCAPNG_LIL_SHB_BOM     0x4D3C2B1A
+#define PCAPNG_LIL_SHB_VER_MA  0x0100
+#define PCAPNG_LIL_SHB_VER_MI  0x0000
 // big endian
-#define PCAPNG_HDR_BIG_BLKLEN 0x0000001C
-#define PCAPNG_HDR_BIG_BOM    0x1A2B3C4D
-#define PCAPNG_HDR_BIG_VER_MA 0x0001
-#define PCAPNG_HDR_BIG_VER_MI 0x0000
+#define PCAPNG_BIG_SHB_BLKLEN  0x0000001C
+#define PCAPNG_BIG_SHB_BOM     0x1A2B3C4D
+#define PCAPNG_BIG_SHB_VER_MA  0x0001
+#define PCAPNG_BIG_SHB_VER_MI  0x0000
 
-int png_tmp; // initializer
+// idb const
+#define PCAPNG_LIL_IDB_BLKTYPE 0x01000000
+#define PCAPNG_BIG_IDB_BLKTYPE 0x00000001
+
+int  png_tmp;                     // initializer
 char png_hdrs[2][PCAPNG_HDR_LEN]; // static headers
-int last_endian; // 0 = little, 1 = big
-size_t png_bytes;
-unsigned char png_hdrbuf[1024];
+int  is_big_endian;               // 0 = little, 1 = big
+
+size_t        png_tmp_bytes;
+unsigned char png_tmp_buffer[65 * 1024];
 
 void f_pcapng_init   (void);
 void f_pcapng_header (void);
