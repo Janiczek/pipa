@@ -1,10 +1,7 @@
 //
 //  f_text.h
 //
-//  Date Created: 25.8.2011
-//  Last Updated: 19.9.2011
-//
-//  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
+//  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
 //                 www.linuxbox.cz
 //
@@ -27,7 +24,7 @@
 #include "pipa.h"
 
 int c;
-int send;
+int may_send;
 
 void f_text_init   (void);
 void f_text_header (void);

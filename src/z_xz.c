@@ -1,10 +1,7 @@
 //
 //  z_xz.c
 //
-//  Date Created: 16.9.2011
-//  Last Updated: 19.9.2011
-//
-//  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
+//  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
 //                 www.linuxbox.cz
 //
@@ -60,7 +57,7 @@ void z_xz_init (void)
   lzma_stream z_xz_tmp = LZMA_STREAM_INIT;
   z_xz_stream = z_xz_tmp;
   
-  memset(z_xz_out,0,Z_XZ_OUT_LEN);
+  ZERO(z_xz_out);
   z_xz_out_max = Z_XZ_OUT_LEN;
   z_xz_out_len = 0;
 }

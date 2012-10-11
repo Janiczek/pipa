@@ -15,7 +15,7 @@ Let it speak for itself:
                 [-# compression level (0..9)]
                 [-v]
                 [-f]
-                [-n [port]] # WIP!
+                [-n socketport] # WIP!
                 filename
 
 Well, that's nice, but really, what are all these settings? Let's walk through them by looking at some examples.
@@ -134,10 +134,7 @@ But when we use -f option, look what happens!
 
 When we want to listen on socket and not on stdin, there's this handy option.
 
-For your information, the default port is 1800.
-
-    $ pipa -n socket_messages.txt      # listening on port 1800
-    $ pipa -n 1337 socket_messages.txt # 1337 - 'cause we are!
+    $ pipa -n 1337 socket_messages.txt
 
 -c - user command
 -----------------

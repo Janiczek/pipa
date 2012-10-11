@@ -1,10 +1,7 @@
 //
 //  f_pcap.c
 //
-//  Date Created: 25.8.2011
-//  Last Updated: 16.10.2011
-//
-//  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
+//  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
 //                 www.linuxbox.cz
 //
@@ -28,7 +25,6 @@
 
 void f_pcap_init (void)
 {
-  NONBLOCK_SET();
   packet_len = 0;
   uses_header = 1;
 }
@@ -37,7 +33,7 @@ void f_pcap_header (void)
 {
   if (!header[0])
   {
-    header_bytes = fread_nb(header,PCAP_FILE_HDR_SIZE);
+    header_bytes = pipa_read(header,PCAP_FILE_HDR_SIZE);
     if (header_bytes < PCAP_FILE_HDR_SIZE)
     {
       eof = 1;
@@ -50,7 +46,7 @@ void f_pcap_header (void)
 void f_pcap_read (void)
 {
   // read packet header into buffer
-  buffer_bytes = fread_nb(buffer,PCAP_PACKET_HDR_SIZE);
+  buffer_bytes = pipa_read(buffer,PCAP_PACKET_HDR_SIZE);
 
   if (buffer_bytes < PCAP_PACKET_HDR_SIZE) // didn't read anything
   {
@@ -66,5 +62,5 @@ void f_pcap_read (void)
                                       : packet_len;
 
   // read packet into buffer after the header
-  buffer_bytes += fread_nb(buffer + buffer_bytes,packet_len);
+  buffer_bytes += pipa_read(buffer + buffer_bytes,packet_len);
 }

@@ -1,9 +1,6 @@
 //
 //  f_pcap.h
 //
-//  Date Created: 1.10.2012 
-//  Last Updated: 4.10.2012 
-//
 //  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
 //                 www.linuxbox.cz

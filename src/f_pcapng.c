@@ -1,9 +1,6 @@
 //
 //  f_pcap.c
 //
-//  Date Created: 1.10.2012
-//  Last Updated: 4.10.2012
-//
 //  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
 //                 www.linuxbox.cz
@@ -28,9 +25,8 @@
 
 void f_pcapng_init (void)
 {
-  NONBLOCK_SET();
   uses_header = 1;
-  memset(png_tmp_buffer,0,sizeof(png_tmp_buffer));
+  ZERO(png_tmp_buffer);
 
   // is C so stupid you can't do it any better than this?
   png_tmp = PCAPNG_SHB_BLKTYPE;     memcpy(png_hdrs[0],    &png_tmp, 4); 
@@ -82,17 +78,17 @@ void f_pcapng_readblock (unsigned char *buf, size_t *bufbytes)
   int block_length = 0;
 
   // read upto block length
-  *bufbytes = fread_nb(buf, PCAPNG_BLK_LEN_POS);
+  *bufbytes = pipa_read(buf, PCAPNG_BLK_LEN_POS);
 
   if (*bufbytes != PCAPNG_BLK_LEN_POS)
-    printError("bad block!");
+    printError("Error - bad PCAP-NG block!\n");
 
   // convert into ints
   memcpy(&block_type,   buf,   sizeof(block_type));
   memcpy(&block_length, buf+4, sizeof(block_length));
 
   // read upto the rest of the block
-  *bufbytes += fread_nb(buf + (*bufbytes),
+  *bufbytes += pipa_read(buf + (*bufbytes),
                         block_length - PCAPNG_BLK_LEN_POS);
 
   // if it's SHB block, find out the endianness

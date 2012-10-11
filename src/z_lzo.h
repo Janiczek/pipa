@@ -1,10 +1,7 @@
 //
 //  z_lzo.h
 //
-//  Date Created: 15.9.2011
-//  Last Updated: 19.9.2011
-//
-//  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
+//  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
 //                 www.linuxbox.cz
 //

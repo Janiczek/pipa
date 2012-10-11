@@ -1,10 +1,7 @@
 //
 //  f_none.c
 //
-//  Date Created: 25.8.2011
-//  Last Updated: 19.9.2011
-//
-//  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
+//  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
 //                 www.linuxbox.cz
 //
@@ -28,7 +25,6 @@
 
 void f_none_init (void)
 {
-  //NONBLOCK_UNSET();
   uses_header = 0;
 }
 
@@ -40,8 +36,6 @@ void f_none_read (void)
   // read full buffer and send it
   // if EOF, cut it before
   
-  buffer_bytes = fread(buffer,1,BUFSIZE,stdin);
+  buffer_bytes = pipa_read(buffer,BUFSIZE);
   eof = buffer_bytes < BUFSIZE;
-
-  //buffer_bytes = fread_nb(buffer,BUFSIZE);
 }

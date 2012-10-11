@@ -1,10 +1,7 @@
 //
 //  f_text.c
 //
-//  Date Created: 25.8.2011
-//  Last Updated: 19.9.2011
-//
-//  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
+//  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
 //                 www.linuxbox.cz
 //
@@ -47,13 +44,13 @@ void f_text_read (void)
       // (later at -t and gzwrite check it something new in buffer)
       case EOF:
         eof = 1;
-        send = 1;
+        may_send = 1;
         buffer[buffer_bytes] = '\0';
         break;
 
       // if \n, write and cut it and send it
       case '\n':
-        send = 1;
+        may_send = 1;
         buffer[buffer_bytes++] = c;
         buffer[buffer_bytes] = '\0';
         break;
@@ -64,11 +61,11 @@ void f_text_read (void)
         if (buffer_bytes == BUFSIZE-1)
         {
           // if line is longer than the buffer, it's its problem!)
-          send = 1;
+          may_send = 1;
           buffer[buffer_bytes] = '\0';
         }
     }
     // complete line? (full buffer counts too)
-    if (send || eof) break;
+    if (may_send || eof) break;
   } while (1);
 }

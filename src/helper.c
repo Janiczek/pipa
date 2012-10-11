@@ -1,10 +1,7 @@
 //
 //  helper.c
 //
-//  Date Created: 26.8.2011
-//  Last Updated: 11.6.2012
-//
-//  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
+//  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
 //                 www.linuxbox.cz
 //
@@ -27,9 +24,8 @@
 #include "helper.h"
 
 // print to stderr
-
 void print      (char *message) { fprintf(stderr,"%s",message); }
-void printError (char *message) { print(message); exit(1); }
+void printError (char *message) { print(message); exit(EXIT_FAILURE); }
 void printUsage (void)
 {
   printError("Usage: pipa [-x format (none | text | pcap)]\n"
@@ -41,6 +37,7 @@ void printUsage (void)
              "            [-# compression level (0..9)]\n"
              "            [-v]\n"
              "            [-f]\n"
+             "            [-n socketport]\n"
              "            filename\n");
 }
 
@@ -259,7 +256,7 @@ void openFile(void)
   // open the file
   if (f_v) fprintf(stderr,"%s: Opening\n",filename);
   z_open();
-  state = file_opened;
+  state = file_open;
 
   if (uses_header)
   {
@@ -291,7 +288,7 @@ void closeFile(void)
 {
   if (f_v) fprintf(stderr,"%s: Closing\n",filename);
   z_close();
-  state = file_not_opened;
+  state = file_not_open;
 }
 
 int checkRotation(void)

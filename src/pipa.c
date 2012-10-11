@@ -1,10 +1,7 @@
 //
 //  pipa.c
 //
-//  Date Created: 25.8.2011
-//  Last Updated: 16.10.2011
-//
-//  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
+//  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
 //                 www.linuxbox.cz
 //
@@ -41,16 +38,25 @@ int main(int argc, char **argv)
   f_v = 0;
 
   command = NULL;
+
+  port       = 0;
+  client_len = 0;
+  addr_server = zero_sockaddr_in;
+  addr_client = zero_sockaddr_in;
+
+  sock_serv_fd = -1;
+  sock_conn_fd = -1;
+  input_fd = fileno(stdin);
   
   cl_set     = 0;
   comp_level = DEFAULT_COMP_LEVEL;
 
-  memset(parameters,0,sizeof(parameters));
+  ZERO(parameters);
   
   inc        = 0;
   inc_needed = 0;
 
-  memset(inc_str,0,sizeof(inc_str));
+  ZERO(inc_str);
   
   size = 0;
   
@@ -67,20 +73,20 @@ int main(int argc, char **argv)
 
   tee_wrote_pcap_header = 0;
 
-  memset(header,0,sizeof(header));
-  memset(buffer,0,sizeof(buffer));  
+  ZERO(header);
+  ZERO(buffer);
 
-  memset(filename,     0,sizeof(filename));
-  memset(filename_mask,0,sizeof(filename_mask));
+  ZERO(filename);
+  ZERO(filename_mask);
 
   filename_dir  = NULL;
   filename_tmp  = NULL;
   filename_tmp2 = NULL;
 
-  memset(currentpath,0,sizeof(currentpath));
-  memset(fullpath,   0,sizeof(fullpath));
+  ZERO(currentpath);
+  ZERO(fullpath);
 
-  state = file_not_opened;
+  state = file_not_open;
   
   f_init   = &f_none_init;
   f_header = &f_none_header;
@@ -96,7 +102,7 @@ int main(int argc, char **argv)
   if (argc == 1) printUsage();
 
   opterr = 0;
-  while ((arg = getopt (argc, argv, "x:tc:z:i:s:fv0123456789")) != -1)
+  while ((arg = getopt (argc, argv, "x:tc:n:z:i:s:fv0123456789")) != -1)
     switch (arg)
     {
       case 'x':
@@ -128,6 +134,11 @@ int main(int argc, char **argv)
       case 'c':
         f_c = 1;
         command = strdup(optarg);
+        break;
+
+      case 'n':
+        f_n = 1;
+        port = strtol(optarg,NULL,10);
         break;
 
       case 'z':
@@ -202,6 +213,7 @@ int main(int argc, char **argv)
 
   ////////////////////////////// module + signal initializations ////
 
+  socket_init();
   f_init();
   z_init();
   sig_init();
@@ -229,7 +241,7 @@ int main(int argc, char **argv)
     while (1) // NEW LOAD OF BUFFER
     {
       buffer_bytes = 0;
-      send = 0;
+      may_send = 0;
 
       // read from STDIN
       f_read();
@@ -251,7 +263,7 @@ int main(int argc, char **argv)
     {
       pid = fork();
 
-      if (pid < 0) printError("Error while trying to execute user command!");
+      if (pid < 0) printError("Error while trying to execute user command!\n");
       else if (pid == 0)
       {
         getcwd(currentpath, sizeof(currentpath));
@@ -264,6 +276,9 @@ int main(int argc, char **argv)
     // did we read it all?
     if (eof) break;
   }
+
+  close(input_fd);
+  close(sock_serv_fd);
 
   return 0;
 }

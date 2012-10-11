@@ -1,10 +1,7 @@
 //
 //  helper.h
 //
-//  Date Created: 26.8.2011
-//  Last Updated: 16.10.2011
-//
-//  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
+//  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
 //                 www.linuxbox.cz
 //
@@ -36,6 +33,8 @@ void    printError         (char *message);
 void    printUsage         (void);
 
 #define PRINT(...) fprintf(stderr,__VA_ARGS__)
+
+#define ZERO(x) memset((x),0,sizeof(x))
 
 int     mkpath             (const char *s, mode_t mode);
 

@@ -1,10 +1,7 @@
 //
 //  pipa.h
 //
-//  Date Created: 24.8.2011
-//  Last Updated: 16.10.2011
-//
-//  Copyright 2011 Martin Janiczek (martin.janiczek@linuxbox.cz)
+//  Copyright 2012 Martin Janiczek (martin.janiczek@linuxbox.cz)
 //                 LinuxBox.cz, s.r.o.
 //                 www.linuxbox.cz
 //
@@ -29,6 +26,7 @@
 
 #include <ctype.h>
 #include <fcntl.h>
+#include <netinet/in.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,7 +39,7 @@
 // functions
 #include "helper.h"
 #include "sighandler.h"
-#include "nonblock.h"
+#include "read.h"
 
 // formats
 #include "f_none.h"
@@ -70,12 +68,24 @@ char f_x;
 char f_t;
 char f_z;
 char f_c;
+char f_n;
 char f_i;
 char f_s;
 char f_f;
 char f_v;
 
 char *command;
+
+int  port;
+int  sock_serv_fd;
+int  sock_conn_fd;
+socklen_t client_len;
+
+static const struct sockaddr_in zero_sockaddr_in; // all zeros automatically
+struct sockaddr_in addr_server; // me
+struct sockaddr_in addr_client; // whoever
+
+int  input_fd;
 
 int  cl_set;
 int  comp_level;
@@ -94,10 +104,7 @@ struct tm     *t_file_st;
 int            t_first;
 unsigned long  t_divided;
 
-enum {
-      file_not_opened,
-      file_opened
-     } state;
+enum {file_not_open, file_open} state;
 
 int            eof;
 int            uses_header;
