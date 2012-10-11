@@ -26,6 +26,7 @@
 
 #include <ctype.h>
 #include <fcntl.h>
+#include <getopt.h>
 #include <netinet/in.h>
 #include <signal.h>
 #include <stdio.h>
@@ -60,6 +61,10 @@
 #define STRSIZE 1024               // for paths, filenames, ...
 #define HDRSIZE 1024
 #define BUFSIZE 256*1024
+
+extern char *optarg;
+extern int   optind;
+extern int   opterr;
 
 // global variables
 
