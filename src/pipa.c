@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 
   sock_serv_fd = -1;
   sock_conn_fd = -1;
-  input_fd = fileno(stdin);
+  input_fd     = 0;
   
   cl_set     = 0;
   comp_level = DEFAULT_COMP_LEVEL;
