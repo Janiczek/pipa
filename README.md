@@ -129,7 +129,7 @@ But when we use -f option, look what happens!
     $ seq 5 | pipa -f imheretoo.txt
     imheretoo.txt: Filename exists - overwriting
 
--n socketport
+-n - socket
 --------------------------------
 
 When we want to listen on socket and not on stdin, there's this handy option.

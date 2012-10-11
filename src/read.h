@@ -23,9 +23,5 @@
 
 #include "pipa.h"
 
-#define NONBLOCK_SET()   fcntl(STDIN_FILENO,F_SETFL,O_NONBLOCK);
-#define NONBLOCK_UNSET() fcntl(STDIN_FILENO,F_SETFL,fcntl(STDIN_FILENO,F_GETFL) & ~O_NONBLOCK);
-
 void socket_init (void);
 size_t pipa_read (void *location, size_t nbytes);
-// TODO
