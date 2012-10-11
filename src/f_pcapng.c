@@ -80,6 +80,13 @@ void f_pcapng_readblock (unsigned char *buf, size_t *bufbytes)
   // read upto block length
   *bufbytes = pipa_read(buf, PCAPNG_BLK_LEN_POS);
 
+  // eof?
+  if (*bufbytes == 0)
+  {
+    eof = 1;
+    return;
+  }
+
   if (*bufbytes != PCAPNG_BLK_LEN_POS)
     printError("Error - bad PCAP-NG block!\n");
 
