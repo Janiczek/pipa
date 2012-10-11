@@ -62,6 +62,17 @@ int mkpath (const char *s, mode_t mode)
     return ret;
 }
 
+// duplicate string - this should live in string.h or stdlib.h
+// but it's not standardized, so there's no guarantee
+// we'll have it here then :)
+char *strdup(const char *str)
+{
+    int n = strlen(str) + 1;
+    char *dup = malloc(n);
+    if (dup) strcpy(dup, str);
+    return dup;
+}
+
 // replace substring
 char *replace_str(char *str, char *orig, char *rep)
 {

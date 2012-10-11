@@ -25,6 +25,7 @@
 
 #include <errno.h>
 #include <libgen.h>
+#include <string.h>
 #include <sys/stat.h> 
 #include <sys/types.h>
 
@@ -38,6 +39,7 @@ void    printUsage         (void);
 
 int     mkpath             (const char *s, mode_t mode);
 
+char   *strdup             (const char *str);
 char   *replace_str        (char *str, char *orig, char *rep);
 
 double  parse_string_size  (char *value);
