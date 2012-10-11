@@ -94,8 +94,10 @@ struct tm     *t_file_st;
 int            t_first;
 unsigned long  t_divided;
 
-int state; // 0 = file not opened ------> exit
-           // 1 = file opened ---> close, exit
+enum {
+      file_not_opened,
+      file_opened
+     } state;
 
 int            eof;
 int            uses_header;

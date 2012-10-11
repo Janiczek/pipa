@@ -80,7 +80,7 @@ int main(int argc, char **argv)
   memset(currentpath,0,sizeof(currentpath));
   memset(fullpath,   0,sizeof(fullpath));
 
-  state = 0;
+  state = file_not_opened;
   
   f_init   = &f_none_init;
   f_header = &f_none_header;

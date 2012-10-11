@@ -259,7 +259,7 @@ void openFile(void)
   // open the file
   if (f_v) fprintf(stderr,"%s: Opening\n",filename);
   z_open();
-  state = 1;
+  state = file_opened;
 
   if (uses_header)
   {
@@ -291,7 +291,7 @@ void closeFile(void)
 {
   if (f_v) fprintf(stderr,"%s: Closing\n",filename);
   z_close();
-  state = 0;
+  state = file_not_opened;
 }
 
 int checkRotation(void)
