@@ -1,7 +1,7 @@
 pipa
 ====
 
-This utility reads data from stdin or socket (WIP), and in its simplest form just outputs it into a file. There's a lot more to it though.
+This utility reads data from stdin or socket, and in its simplest form just outputs it into a file. There's a lot more to it though.
 
 Let it speak for itself:
 
@@ -15,7 +15,7 @@ Let it speak for itself:
                 [-# compression level (0..9)]
                 [-v]
                 [-f]
-                [-n socketport] # WIP!
+                [-n socketport]
                 filename
 
 Well, that's nice, but really, what are all these settings? Let's walk through them by looking at some examples.
@@ -129,12 +129,12 @@ But when we use -f option, look what happens!
     $ seq 5 | pipa -f imheretoo.txt
     imheretoo.txt: Filename exists - overwriting
 
--n port (WIP!)
+-n socketport
 --------------------------------
 
 When we want to listen on socket and not on stdin, there's this handy option.
 
-    $ pipa -n 1337 socket_messages.txt
+    $ pipa -n 1800 socket_messages.txt
 
 -c - user command
 -----------------
@@ -157,7 +157,7 @@ TODO
 ====
 
 - Test suite somehow combining all formats, all compressions, + rotation?
-- Non-blocking read for -x other than pcap - what was the issue here again?
+- Non-blocking read that works the same for socket and fd? Or do we have to differentiate?
 
 - BUFSIZE - smaller value? set by user or by the "-s" value?
 - Why can't we just set the `Z_XZ_OUT_LEN` to the `BUFSIZE?`
