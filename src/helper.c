@@ -322,3 +322,28 @@ int checkRotation(void)
   return 0;
 }
 
+/*
+
+UNTESTED!!! BUT SHOULD WORK
+-- TODO - what about normal, non-socket fds? how to make *them* NB?
+
+int make_socket_non_blocking (int sfd)
+{
+  int flags;
+  int s;
+
+  flags = fcntl (sfd, F_GETFL, 0);
+
+  if (flags == -1)
+    printError("fcntl error when getting\n");
+
+  flags |= O_NONBLOCK;
+  s = fcntl (sfd, F_SETFL, flags);
+
+  if (s == -1)
+    printError("fcntl error when setting\n");
+
+  return 0;
+}
+
+*/
